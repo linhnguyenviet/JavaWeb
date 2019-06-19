@@ -32,11 +32,7 @@
             String a = ( String ) request.getAttribute("sessCustomer");
             out.write(a);
             %>
-            <h1>${MESS}</h1>
             <%@ include file="/Structure/footer.jsp" %>
-        </div>
-            <%@ include file="/Structure/footer.jsp" %>
-
         </div>
         
     </body>
