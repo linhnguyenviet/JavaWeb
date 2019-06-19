@@ -80,11 +80,13 @@ public class register extends HttpServlet {
         String cpassword = request.getParameter("cpassword");
         String address = request.getParameter("address");
         String contact = request.getParameter("contact");
-        
-        
-        
-        Customer cus = new Customer(3,name,email,password,contact,address,address);
+         response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        out.println(name);
+       
         CustomerDAO c = new CustomerDAO();
+        Customer cus = new Customer(c.sizeOfCustomer()+1,name,email,password,contact,address,address);
+//        
         if(name.isEmpty() || email.isEmpty() || password.isEmpty() || cpassword.isEmpty() || address.isEmpty() || contact.isEmpty()){
             String mess = "All inputs must be filled in";
             request.setAttribute("MESS", mess);
@@ -110,7 +112,7 @@ public class register extends HttpServlet {
             request.setAttribute("MESS", mess);
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
-        else{
+        else {
             String mess = "Add success!!!";
             request.setAttribute("MESS", mess);
             request.getRequestDispatcher("index.jsp").forward(request, response);
