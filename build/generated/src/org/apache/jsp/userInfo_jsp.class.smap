@@ -1,0 +1,24 @@
+SMAP
+userInfo_jsp.java
+JSP
+*S JSP
+*F
++ 0 userInfo.jsp
+userInfo.jsp
++ 1 header.jsp
+Structure/header.jsp
++ 2 footer.jsp
+Structure/footer.jsp
+*L
+5,28:53
+5#1,114:81
+32#0,3:194
+35,4:198
+38,8:202
+46:210,5
+47,37:215
+84:252,3
+85,5:255
+5#2,106:260
+89#0,5:365
+*E
