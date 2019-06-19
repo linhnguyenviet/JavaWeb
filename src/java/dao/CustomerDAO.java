@@ -53,23 +53,37 @@ public class CustomerDAO {
     // phương thức thêm tài khoản
     public boolean insertUser(Customer u) {
         Connection connection = DBConnect.getConnection();
-        String sql = "INSERT INTO Customer VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Customer (cId, cName, Email, Password, Phone, Address, Place) VALUES('" + u.getcID() + "',N'" + u.getcName() + "','" + u.getEmail()+"',N'" + u.getPassword()+"','" + u.getPhone()+"',N'" + u.getAddress()+"',N'" + u.getAddress()+"')";
         try {
             PreparedStatement ps = connection.prepareCall(sql);
-            ps.setInt(1, u.getcID());
-            ps.setString(2, u.getcName());
-            ps.setString(3, u.getEmail());
-            ps.setString(4, u.getPassword());
-            ps.setString(5, u.getPhone());
-            ps.setString(6, u.getAddress());
-            ps.setString(7, u.getAddress());
-            
             ps.executeUpdate();
+            ps.close();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    public int sizeOfCustomer(){
+        Connection connection = DBConnect.getConnection();
+        String sql = "SELECT * FROM Customer";
+        int count = 0;
+        try {
+            Statement s = connection.createStatement();
+            ResultSet rs = s.executeQuery(sql);
+            
+            
+            while(rs.next()){
+                count++;
+            }
+            rs.close();
+            s.close();
+            return count;
+        } catch (SQLException e) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return count;
     }
     
     public Customer login(String email, String password) {
