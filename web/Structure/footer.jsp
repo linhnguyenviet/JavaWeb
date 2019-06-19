@@ -9,14 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>x
+        <title>JSP Page</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
         <link rel="stylesheet" href="%PUBLIC_URL%/reset.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
         <link href="./Style/App.css" type="text/css" rel="stylesheet" />    
          <link href="./Style/BottomFooter.css" type="text/css" rel="stylesheet" /><!--<!--
--->     <link href="./Style/TopFooter.css" type="text/css" rel="stylesheet" /><
+-->     <link href="./Style/TopFooter.css" type="text/css" rel="stylesheet" />
     </head>
     <body>
         <div style="background:#313131">

@@ -34,9 +34,6 @@
             %>
             <%@ include file="/Structure/footer.jsp" %>
         </div>
-            <%@ include file="/Structure/footer.jsp" %>
-
-        </div>
         
     </body>
 </html>

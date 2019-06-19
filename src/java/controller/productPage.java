@@ -78,6 +78,7 @@ public class productPage extends HttpServlet {
                         Logger.getLogger(productPage.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     request.setAttribute("page", pages);
+                    request.setAttribute("index", index);
 
                 try {
                     list = f.getListFlowerByPages(9*(indexx-1)+1, 9*(indexx-1)+9);
