@@ -29,8 +29,17 @@
                          <i class="fab fa-linkedin-in" > </i>
                          <i class="fab fa-instagram" > </i>
                         <div class="TopHeader-login"></i>
-                        <i class="fas fa-user"> </i><a href="login.jsp">Đăng nhập</a>
-                        <i class="fas fa-user-plus"></i><a href="register.jsp">Đăng kí</a>
+                        <i class="fas fa-user"> 
+                        </i><a href="login.jsp">
+                            <%
+                              if(session.getAttribute("sessuser")==null) {
+                            %>
+                            Đăng nhập</a>
+                            <% }else { %>
+                                <%=session.getAttribute("sessuser")%>             
+                            <%}%>
+                        <i class="fas fa-user-plus"></i>
+                        <a href="register.jsp">Đăng kí</a>
                         </div>
                     </div>
                 </div>

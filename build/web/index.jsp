@@ -22,21 +22,23 @@
     </head>
     <body>
         <div class="App">
-            <%@ include file="/Structure/header.jsp" %> 
-                   WELCOME LOGIN 
-            <a
-                href="<%=request.getContextPath()%>/LogoutServlet">Logout
-            </a>
-            
-            <%  
-            String a = ( String ) request.getAttribute("sessCustomer");
-            out.write(a);
-            %>
-            <h1>${MESS}</h1>
-            <%@ include file="/Structure/footer.jsp" %>
-        </div>
-            <%@ include file="/Structure/footer.jsp" %>
+            <%@ include file="/Structure/header.jsp" %>
 
+
+            <%
+            if(session.getAttribute("sessuser")==null) {
+            %>
+            Welcome, new customer!
+            <% }else { %>
+            <p>
+            Welcome,
+            <%=session.getAttribute("sessuser")%>
+            ! You have successfully logged in. Thank you. &nbsp; &nbsp;<a
+                href="<%=request.getContextPath()%>/LogoutServlet">Logout</a>
+                
+            </p>
+            <%}%>
+            <%@ include file="/Structure/footer.jsp" %>
         </div>
         
     </body>

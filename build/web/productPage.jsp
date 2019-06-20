@@ -19,15 +19,19 @@
         <div class="grid">
         <% 
             ArrayList<Flower> list = new ArrayList<Flower>();
+            String index = (String) request.getAttribute("index");
+            int indexx = Integer.parseInt(index);
             list = (ArrayList<Flower>) request.getAttribute("list");
+            int id = 0+(indexx-1)*9;
             for( Flower b : list) {
+                id++;
         %>
         <div class="product">  
             <div class="product__img">
                 <img src ="<%=b.getImg()%>" alt="" </p>
             </div>
             <div class="product__name">
-                <p> <a href="productDetail"><%=b.getfName()%></a>  </p>
+                <p> <a href="productDetail?id=<%=id%>"><%=b.getfName()%></a>  </p>
             </div>
             <div class="product__category">
                 <p>  <%=b.getCategory()%> </p>
