@@ -96,6 +96,7 @@ public class CustomerDAO {
             if (rs.next()) {
                 Customer u = new Customer();
                 u.setcID(rs.getInt("cID"));
+                u.setcName("cName");
                 u.setEmail(rs.getString("Email"));
                 u.setPassword(rs.getString("Password"));
                 u.setPhone(rs.getString("Phone"));
@@ -110,6 +111,27 @@ public class CustomerDAO {
         }
         return null;
     }
+    
+    public String getNameLogin(String email){
+        Connection con = DBConnect.getConnection();
+        String sql = "select * from Customer where Email = '" + email + "'";
+        PreparedStatement ps;
+        String name = null;
+        try {
+            ps = (PreparedStatement) con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                name = rs.getString("cName");
+                con.close();
+                return name;
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public ArrayList<Customer> getAll(){
         try {
             Connection con = DBConnect.getConnection();

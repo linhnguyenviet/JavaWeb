@@ -70,45 +70,51 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html");  
-        PrintWriter out=response.getWriter();  
-          
-          
+        CustomerDAO cus = new CustomerDAO();
+        String password = request.getParameter("password");
+
         String email=request.getParameter("email");  
-        String password=request.getParameter("password");  
-        
-        CustomerDAO cu = new CustomerDAO();
-        Customer cus;
-        cus = cu.login(email, password);
-        if(cus != null) {
+
+        if (email != null && email.trim().length() > 0 && password != null && password.trim().length() > 0) {
+          System.out.println(email + ":" + password);
+          boolean success = controller.Auth.authenticate(email.trim(), password.trim());
+          if (success) {
             if (request.getParameter("remember") != null) {
-                String remember = request.getParameter("remember");
-                request.setAttribute("cAddress", cus.getAddress()); 
-                request.getRequestDispatcher("profile.jsp").include(request, response); 
-                Cookie cEmail = new Cookie("cEmail", email);
-                Cookie cPassword =  new Cookie("cPassword", password);
-                Cookie cRemember = new Cookie("cRemember", remember);
-                cEmail.setMaxAge(60 * 60 * 24 * 15);
-                cPassword.setMaxAge(60 * 60 * 24 * 15);
-                cRemember.setMaxAge(60 * 60 * 24 * 15);
-                
-                response.addCookie(cEmail);
-                response.addCookie(cPassword);
-                response.addCookie(cRemember);
-                
-                
-                
+              String remember = request.getParameter("remember");
+              System.out.println("remember : " + remember);
+              Cookie cEmail = new Cookie("cookemail", email.trim());
+              Cookie cName = new Cookie("cookname", cus.getNameLogin(email.trim()));
+              Cookie cPassword = new Cookie("cookpass", email.trim());
+              Cookie cRemember = new Cookie("cookrem", remember.trim());
+              cEmail.setMaxAge(60 * 60 * 24 * 15);//15 days
+              cName.setMaxAge(60 * 60 * 24 * 15);
+              cPassword.setMaxAge(60 * 60 * 24 * 15);
+              cRemember.setMaxAge(60 * 60 * 24 * 15);
+              response.addCookie(cEmail);
+              response.addCookie(cName);
+              response.addCookie(cPassword);
+              response.addCookie(cRemember);
             }
             HttpSession httpSession = request.getSession();
-            httpSession.setAttribute("sessCustomer", "Welcome!");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-            
+            httpSession.setAttribute("sessuser", cus.getNameLogin(email.trim()));
+
+
+
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.jsp");
+            RequestDispatcher requestDispatcher1 = request.getRequestDispatcher("/header.jsp");
+            requestDispatcher.forward(request, response);
+          } else {
+            System.out.println("Email and password invalid.");
+            request.setAttribute("msg", "Email and password invalid.");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
+            requestDispatcher.forward(request, response);
+          }
         } else {
-            System.out.println("Login Failed.");
-            request.setAttribute("msg", "Login Failed.");
-            request.getRequestDispatcher("login.jsp").include(request, response); 
+          System.out.println("Email and Password are required fields.");
+          request.setAttribute("msg", "Email and Password are required fields.");
+          RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
+          requestDispatcher.forward(request, response);
         }
-        out.close();  
     }
 
     /**

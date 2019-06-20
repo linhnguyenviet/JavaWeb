@@ -7,6 +7,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -58,9 +59,9 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Cookie cEmail = new Cookie("cEmail", null);
-        Cookie cPassword = new Cookie("cPassword", null);
-        Cookie cRemember = new Cookie("cRemember", null);
+        Cookie cEmail = new Cookie("cookemail", null);
+        Cookie cPassword = new Cookie("cookpass", null);
+        Cookie cRemember = new Cookie("cookrem", null);
         cEmail.setMaxAge(0);
         cPassword.setMaxAge(0);
         cRemember.setMaxAge(0);
@@ -69,8 +70,9 @@ public class LogoutServlet extends HttpServlet {
         response.addCookie(cRemember);
         HttpSession httpSession = request.getSession();
         httpSession.invalidate();
-        request.setAttribute("sessCustomer", "You have successfully logged out.");
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
+        request.setAttribute("msg", "You have successfully logged out.");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
+        requestDispatcher.forward(request, response);
     }
 
     /**
